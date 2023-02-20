@@ -1,0 +1,126 @@
+<%- include("partials/admin-header.ejs") -%>
+
+            <!-- PAGE INNER
+            ================================================== -->
+            <div class="page-inner">
+
+                <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+                <div id="main-wrapper">
+
+                    <!-- row -->
+                    <div class="row align-items-center g-3 grid-margin">
+                        <div class="col-12">
+                            <div class="card card-white">
+                                <div class="card-body row align-items-center">
+                                    <div class="col-12 col-md-4">
+                                        <h4 class="mb-4 mb-md-0">Year Report</h4>
+                                    </div>
+
+                                    <div class="col-12 col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3 mb-md-0">
+                                                <button  id="download-button" type="button" class="btn btn-primary" >
+                                                    <a href="/salesreport" >Day Report</a>
+                                                    </button>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3 mb-md-0">
+                                                <button  id="download-button" type="button" class="btn btn-primary" >
+                                                    <a href="/monthreport" > Month Report</a>
+                                                    </button>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <a  id="download-button" onclick="generatePDF()" type="button" class="btn btn-primary" >
+                                                    Download PDF
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card card-white">
+                                <div class="card-body">
+                                    <div class="table-responsive" id="invoice">
+                                        <table class="table" id="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Year</th>
+                                                    <th scope="col">Total order</th>
+                                                    <th scope="col">Total sold product</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Profit</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(let sales of salesReport) { %>
+                                                <tr>
+                                                    <th scope="row"><%=sales._id.year %></th>
+                                                    <td><%= sales.count %></td>
+                                                    <td><%= sales.products %></td>
+                                                    <td><%= sales.totalPrice %></td>
+                                                    <% let profit=Math.round((sales.totalPrice * 10)/100 )%>
+                                                    <td>₹ <%= profit %></td>
+                                                    
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+
+                <div class="page-footer">
+                    <p>Copyright &copy; <span class="current-year"></span> NNOOlMART All rights reserved.</p>
+                </div>
+            </div>
+
+        <%- include("partials/admin-footer.ejs") -%>
+        <script>
+
+            function toMonthName(monthNumber) {
+              const date = new Date();
+              date.setMonth(monthNumber - 1);
+            
+              return date.toLocaleString('en-US', {
+                month: 'long',
+              });
+            }
+            
+            
+              </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</script>
+<script>
+//    const button = document.getElementById('download-button');
+
+   function generatePDF() {
+    console.log("download pdf")
+       // Choose the element that your content will be rendered to.
+       const element = document.getElementById('main-wrapper');
+       // Choose the element and save the PDF for your user.
+       html2pdf().from(element).save();
+   }
+
+//    button.addEventListener('click', generatePDF);
+</script>
+<script>
+  $(document).ready(function () {
+      $('#table').DataTable();
+  });
+  </script>

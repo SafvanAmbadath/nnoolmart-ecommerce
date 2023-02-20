@@ -1,0 +1,344 @@
+<%- include("partials/user-header.ejs") -%>
+        
+       
+
+        <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section bg-img cover-background" data-background="img/bg/bg-8.jpg">
+            <div class="container">
+
+                <div class="title-info">
+                    <h1>Shop Cart</h1></div>
+                <div class="breadcrumbs-info">
+                    <ul class="ps-0">
+                        <li><a href="home-shop-1.html">Home</a></li>
+                        <li><a href="#">Shop Cart</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- CART TABLE
+        ================================================== -->
+        <section class="md">
+            <div class="container">
+
+                <div class="row">
+                    <% if(notAvailable.length>0) {%>
+                    <p class="form-text" id="" style="color:red"><%= notAvailable %></p>
+                    <% } %>
+                    <!-- product table -->
+                    <div class="col-12 shop-cart-table">
+                        <table class="table shop-cart text-center">
+                            <colgroup>
+                                <col width="100">
+                                    <col>
+                                        <col width="1">
+                                            <col>
+                                                <col width="100">
+                                                    <col width="1">
+                            </colgroup>
+
+                            <thead>
+                                <tr>
+                                    <th class="first"></th>
+                                    <th class="text-start text-uppercase font-weight-500">Product</th>
+                                    <th class="text-start text-uppercase font-weight-500">Price</th>
+                                    <th class="text-center text-uppercase font-weight-500">Qty</th>
+                                    <th class="text-start text-uppercase font-weight-500">Sub Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(cart of allCart.items) { %> 
+                                <tr>
+                                    <td class="product-thumbnail text-start">
+                                        <a href="#"><img src="/img/<%= cart.product.imageUrl[0] %> " alt="..." ></a>
+                                    </td>
+                                    <td class="text-start">
+                                        <h6><a href="/product?productid=<%= cart.product._id %>"><%= cart.product.productName %></a></h6>
+                                        <!-- <span class="text-uppercase d-block">SKU: 290397</span> -->
+                                        <!-- <a href="#" class="display-31"><i class="fas fa-edit"></i> Edit</a> -->
+                                    </td>
+                                    <td class="text-start">
+                                         ₹ <%= cart.product.discountPrice %> 
+                                    </td>
+                                    <td class="=product quantity">
+                                        <% if(cart.quantity==1) { %> 
+                                        <i style="visibility: hidden;" class="fas fa-minus" onclick="changeQuantity('<%= allCart._id %>','<%= cart.product._id %>','-1')"></i>
+                                        <% }else { %> 
+                                            <i class="fas fa-minus" onclick="changeQuantity('<%= allCart._id %>','<%= cart.product._id %>','-1')"></i>
+                                            <% } %> 
+                                        <input class="text-center" type="text" id="qty" name="quantity" value="<%= cart.quantity %> " readonly/>
+                                        <i class="fas fa-plus" onclick="changeQuantity('<%= allCart._id %>','<%= cart.product._id %>','1')"></i>
+                                    </td>
+                                    
+                                    <td class="product-subtotal text-start">₹ <%= cart.totalPrice %> </td>
+                                    <td class="product-remove text-center">
+                                        <a href="#" onclick="deleteProduct('<%= cart.product._id %>')"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                <% } %> 
+                                <!-- <tr>
+                                    <td class="product-thumbnail text-start">
+                                        <a href="#"><img src="img/products/thumbs/thumb-02.jpg" alt="..." ></a>
+                                    </td>
+                                    <td class="text-start">
+                                        <a href="#">Sun Protection Cap </a>
+                                        <span class="text-uppercase d-block">SKU: 290397</span>
+                                        <a href="#" class="display-31"><i class="fas fa-edit"></i> Edit</a>
+                                    </td>
+                                    <td class="text-start">
+                                        $10.20
+                                    </td>
+                                    <td class="product-quantity">
+                                        <input type="text" name="q2" />
+                                    </td>
+                                    <td class="product-subtotal text-start">$10.20</td>
+                                    <td class="product-remove text-center">
+                                        <a href="#"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="product-thumbnail text-start">
+                                        <a href="#"><img src="img/products/thumbs/thumb-05.jpg" alt="..." ></a>
+                                    </td>
+                                    <td class="text-start">
+                                        <a href="#">Heel Character Shoes</a>
+                                        <span class="text-uppercase d-block">SKU: 290397</span>
+                                        <a href="#" class="display-31"><i class="fas fa-edit"></i> Edit</a>
+                                    </td>
+                                    <td class="text-start">
+                                        $19.50
+                                    </td>
+                                    <td class="product-quantity">
+                                        <input type="text" name="q3" />
+                                    </td>
+                                    <td class="product-subtotal text-start">$19.50</td>
+                                    <td class="product-remove text-center">
+                                        <a href="#"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end product table -->
+
+                    <!-- button set -->
+                    <div class="col-12 border-bottom py-1-9 py-lg-2-3 mb-3 mb-md-4 mb-lg-0">
+                        <!-- <button class="butn-style2 small bg-color mb-2 mb-md-0"><span>Empty Cart</span></button> -->
+                        <a href="/products" class="butn-style2 small bg-color float-end ms-2 mb-2 mb-md-0"><span>Continue Shopping</span></a>
+                        <a href="" class="butn-style2 small bg-color float-end ms-2"><span>Update Shopping Cart</span></a>
+                    </div>
+                    <!-- end button set -->
+
+                    <!-- total block set -->
+                    <div class="col-12 cart-total pt-1-9 pt-lg-2-3">
+                        <div class="row">
+
+                            <div class="col-lg-5 col-md-5 mb-1-9 mb-md-0">
+                                <!-- <div id="accordion" class="accordion-style3">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Coupon Code
+                                </button>
+                                    </h5>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                                            <div class="card-body">
+
+                                                <form>
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 mb-2">
+
+                                                            <div class="form-group">
+                                                                <label>Enter Your Coupon Code</label>
+                                                                <input type="text" class="form-control" name="couponcode" placeholder="Enter Your Coupon Code">
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <button type="button" class="butn-style2 small">Apply Code</button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Calculate Shipping
+                                </button>
+                              </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                                            <div class="card-body">
+
+                                                <form action="#">
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 mb-2">
+
+                                                            <div class="form-group">
+                                                                <label>Country</label>
+                                                                <select class="form-control form-select">
+                                                                    <option value="" selected="selected">Select a country</option>
+                                                                    <option value="AF">Afghanistan</option>
+                                                                    <option value="AL">Albania</option>
+                                                                   
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 mb-2">
+
+                                                            <div class="form-group">
+                                                                <label>City/State</label>
+                                                                <input type="text" class="form-control" name="city" placeholder="Your city/state name here">
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 mb-2">
+
+                                                            <div class="form-group">
+                                                                <label>Zip Code</label>
+                                                                <input type="text" class="form-control" name="zip" placeholder="Your zip code here">
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <button type="button" class="butn-style2 small">Update Totals</button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                <!-- </div> -->
+                            </div>
+
+                            <div class="col-lg-6 offset-lg-1 col-md-7 offset-md-0">
+                                <table class="table cart-sub-total">
+                                    <tbody>
+                                        <tr>
+                                            <th class="text-end pe-0 text-uppercase">Cart Subtotal</th>
+                                            <td class="text-uppercase text-end pe-0">₹ <%= allCart.cartTotalPrice %> </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-end pe-0 text-uppercase">Shipping and Handling</th>
+                                            <td class="text-uppercase text-end pe-0">Free</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pe-0 p-0" colspan="2">
+                                                <hr>
+                                            </td>
+                                        </tr>
+                                        <tr class="total">
+                                            <th class="text-uppercase text-end pe-0 p-0">Order Total</th>
+                                            <td class="text-uppercase text-end pe-0 p-0">₹ <%= allCart.cartTotalPrice %></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pe-0 p-0" colspan="2">
+                                                <hr class="mb-0">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a class="butn-style2 float-end" href="/checkout"><span>Proceed to Checkout</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end total block set -->
+
+                </div>
+
+            </div>
+        </section>
+       <script>
+        function changeQuantity(cartId,productId,count) {
+            console.log("reached in function")
+           let qty = document.querySelector('#qty')
+            axios.patch(`/cart?cartId=${cartId}&productId=${productId}&count=${count}`)
+            .then((e) =>{
+           if(e.data.stockReached){
+            
+
+              const Toast = Swal.mixin({
+               toast: true,
+               position: '',
+               showConfirmButton: false,
+               timer: 3000,
+               timerProgressBar: true,
+               didOpen: (toast) => {
+                 toast.addEventListener('mouseenter', Swal.stopTimer)
+                 toast.addEventListener('mouseleave', Swal.resumeTimer)
+               }
+                })
+
+                Toast.fire({
+                  icon: 'error',
+                  title: 'Product Out of Stock',
+                })        
+               }  else{
+               console.log("location reload")
+                 location.reload()
+               }            
+                 })
+               }
+
+               function deleteProduct(productId){
+           Swal.fire({
+                 title: "Are you sure?",
+                 text: "You won't be able to revert this!",
+                 icon: "warning",
+                 showCancelButton: true,
+                 confirmButtonColor: "#3085d6",
+                 cancelButtonColor: "#d33",
+                 confirmButtonText: "Yes, delete it!",
+               }).then(async(result) => {
+                 if (result.isConfirmed) {
+                  await axios.delete(`/cart?productid=${productId}`)
+                     .then((result) => {
+                       if (result.data) {
+                         Swal.fire(
+                           "Deleted!",
+                           "Your file has been deleted.",
+                           "success"
+                         ).then(()=>{
+                           location.reload()
+                         })
+                       } else {
+                         alert("something went wrong");
+                       }
+                     });
+                 }
+               });
+        }
+       </script>
+            <!-- axios   -->
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <%- include("partials/user-footer.ejs") -%>

@@ -1,0 +1,227 @@
+<%- include("partials/admin-header.ejs") -%>
+
+            <!-- PAGE INNER
+            ================================================== -->
+            <div class="page-inner">
+
+                <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+                <div id="main-wrapper">
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-6 grid-margin">
+                            <div class="card card-white">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Add Coupon</h4>
+                                </div>
+                                <% if(couponAddErr.length>0) {%>
+                                  <p class="form-text" id="" style="color:red"><%= couponAddErr %></p>
+                                  <% }else if(couponAddExistErr.length>0){ %>
+                                      <p class="form-text" id="" style="color:red"><%= couponAddExistErr %></p>
+                                      <% } %>
+                                <div class="card-body">
+                                    <form action="/adminaddcoupon" method="post">
+                                        <!-- <div class="form-group">
+                                            <label for="exampleInput1">Coupan Title</label>
+                                            <input type="text" class="form-control" id="exampleInput1">
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label for="exampleInput2">Coupon Code</label>
+                                            <input type="text" name="code" class="form-control" id="exampleInput2">
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label>In percentage</label>
+                                            <input type="" class="form-control"
+                                              onclick="changeType('Percentage')"
+                                            class="form-control date-picker"
+                                            id="type"
+                                            name="CouponType"
+                                            type="radio"
+                                            value="Percentage"
+                                            checked >
+                                       
+                                            <label>Amount</label>
+                                            <input type="" class="form-control"
+                                             onclick="changeType('Amount')"
+                                            id="type"
+                                            name="CouponType"
+                                            type="radio"
+                                            value="Amount">
+                                        </div> -->
+
+                                        <!-- <label class="block mt-4 text-sm">
+                                            <span class="text-gray-700 dark:text-gray-400" id="typePercentage"
+                                              >CUT-OFF Percentage</span
+                                            > -->
+                                            <span
+                                              class="text-gray-700 dark:text-gray-400"
+                                              id="typeAmount"
+                                              
+                                              >CUT-OFF Amount</span
+                                            >
+                                          </label>
+                                          <input
+                                          class="form-control date-picker"
+                                          name="cutOff"
+                                          type="number"
+                                        />
+                              
+                                        <!-- cut off end -->
+                                        <label class="block mt-4 text-sm">
+                                          <span class="text-gray-700 dark:text-gray-400"
+                                            >Min. Amount of Cart</span
+                                          >
+                                        </label>
+                                        <input
+                                        class="form-control date-picker"
+                                          name="minAmount"
+                                          type="number"
+                                        />
+                              
+                                        <label class="block mt-4 text-sm">
+                                          <span class="text-gray-700 dark:text-gray-400"
+                                            >Max. Redeem Amount</span
+                                          >
+                                        </label>
+                                          <input
+                                          class="form-control date-picker"
+                                            name="maxAmount"
+                                            type="number"
+                                          />
+                                        
+                              
+                                        <label class="block mt-4 text-sm">
+                                          <span class="text-gray-700 dark:text-gray-400"
+                                            >No. of coupons to generate</span
+                                          >
+                                        </label>
+                                          <input
+                                          class="form-control date-picker"
+                                            name="generateCount"
+                                            type="number"
+                                          />
+                                       
+                                        <label class="block mt-4 text-sm">
+                                          <span class="text-gray-700 dark:text-gray-400">valid upto</span>
+                                        </label>
+                                          <input
+                                          class="form-control date-picker"
+                                            name="expireDate"
+                                            type="date"
+                                          />
+                                        
+
+                                        <div>
+                                            <button type="submit" class="btn btn-primary mt-4">Add Coupon</button>
+                                        </div>
+                                     
+
+
+                                        <!-- <div class="custom-control custom-checkbox my-4">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Allow Free Shipping
+                                            </label>
+                                        </div> -->
+                                        <!-- <div class="form-group">
+                                            <label for="exampleInput3">Quantity</label>
+                                            <input type="number" class="form-control" id="exampleInput3">
+                                        </div> -->
+                                        <!-- <div class="form-group">
+                                            <label for="validationCustom02">Discount Type</label>
+                                            <select class="form-select form-control" id="validationCustom02" aria-label="Default select example">
+                                                <option selected>--Select--</option>
+                                                <option value="1">Percent</option>
+                                                <option value="2">Fixed</option>
+                                            </select>
+                                        </div> -->
+                                        <!-- <div class="custom-control custom-checkbox mt-4">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2">
+                                            <label class="form-check-label" for="flexCheckChecked2">
+                                                Enable the coupon
+                                            </label>
+                                        </div> -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <!-- row -->
+                    <!-- <div class="row">
+                        <div class="col-md-6 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Restriction</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleInput4">Products</label>
+                                            <input type="text" class="form-control" id="exampleInput4">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="validationCustom03">Category</label>
+                                            <select class="form-select form-control" id="validationCustom03" aria-label="Default select example">
+                                                <option selected>--Select--</option>
+                                                <option value="1">Electronics</option>
+                                                <option value="2">Clothes</option>
+                                                <option value="3">Shoes</option>
+                                                <option value="4">Digital</option>
+                                                <option value="5">Furniture</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInput5">Minimum Spend</label>
+                                            <input type="number" class="form-control" id="exampleInput5">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInput6">Maximum Spend</label>
+                                            <input type="number" class="form-control" id="exampleInput6">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Usage Limits</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleInput7">Per Limit</label>
+                                            <input type="number" class="form-control" id="exampleInput7">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInput8">Per Customer</label>
+                                            <input type="number" class="form-control" id="exampleInput8">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- end row -->
+                </div>
+
+                <div class="page-footer">
+                    <p>Copyright &copy; <span class="current-year"></span> Smartshop All rights reserved.</p>
+                </div>
+            </div>
+
+            <!-- <script>
+                function changeType(type) {
+                  if (type == "Amount") {
+                    document.getElementById("typeAmount").hidden = false;
+                    document.getElementById("typePercentage").hidden = true;
+                  } else if (type == "Percentage") {
+                    document.getElementById("typeAmount").hidden = true;
+                    document.getElementById("typePercentage").hidden = false;
+                  }
+                }
+              </script> -->
+
+            <%- include("partials/admin-footer.ejs") -%>

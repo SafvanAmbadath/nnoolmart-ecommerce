@@ -1,0 +1,82 @@
+<%- include("partials/user-header.ejs") -%>
+
+	
+
+
+
+   <!-- LOGIN REGISTER
+        ================================================== -->
+        <section class="md pt-5 "data-background="img/bg/bg-1.jpg" style="background-image: url(img/bg/bg-1.jpg);background-size: cover;">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="col-lg-6 mb-1-9 mb-lg-0">
+
+                        <div class="common-block ">
+
+                            <div class="inner-title">
+                                <h4 class="mb-0">Login</h4>
+                             
+                            </div>
+
+                            <form action="/login" method="post">
+
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control" name="email" placeholder="Your Email name here">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12">
+
+                                        <div class="form-group">
+                                            <label>Password </label>
+                                            <input type="password" class="form-control" name="password" placeholder="Your password here">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                              
+                                <% if(passErr.length>0) {%>
+                                    <p class="form-text" id="" style="color:red"><%= passErr  %></p>
+                                <% }else if(emailErr.length>0) {%>
+                                    <p class="form-text" id="" style="color:red"><%= emailErr  %></p>
+                                <% }else if(fillErr.length>0) {%>
+                                        <p class="form-text" id="" style="color:red"><%= fillErr  %></p>
+                                <% } %>    
+
+                                <div class="row">
+									<!-- <div class="col-sm-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="login-remember">
+                                            <label class="form-check-label" for="login-remember">Keep me signed in</label>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-sm-6 text-start text-md-end">
+                                        <a href="account-password-recovery.html" class="m-link-muted">Forgot password?</a>
+                                    </div> -->
+									<label class="form-check-label" for="terms-condition">Don't have an account? <a href="/register" class="text-primary">Register here</a></label>
+
+                                </div>
+
+                                <button type="submit" class="butn-style2 mt-4">Login</button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </section>
+
+
+
+				<%- include("partials/user-footer.ejs") -%>

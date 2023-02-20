@@ -1,0 +1,81 @@
+const mongoose= require("mongoose");
+const {array} = require("../middlewares/multer")
+
+const orderSchema= new mongoose.Schema({
+    date:{
+        type:String,
+        required:true
+    },
+    time:{
+        type:String,
+        required:true
+    },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"userCollection",
+        required:true
+    },
+    products:[{
+        product:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"productsCollection"
+        },
+        quantity:{
+            type:Number,
+            default:1
+        },
+        totalPrice:{
+            type:Number,
+            default:0
+        }
+    }],
+    total:{
+        type:Number,
+        required:true
+    },
+    address:{
+        firstName:String,
+        addressLine:String,
+        city:String,
+        country:String,
+        state:String,
+        pinCode:Number,
+        addressType:String
+    },
+    paymentMethod:{
+        type:String,
+        required:true
+    },
+    paymentStatus:{
+        type:String,
+        required:true
+    },
+    orderStatus:{
+        type:String,
+        required:true
+    },
+    track:{
+        type:String
+    },
+    returnReason:{
+        type:String
+    },
+    returnApprove:{
+        type:Boolean,
+        default:false
+    },
+    useWallet:{
+        type:Number
+    },
+    couponDiscount:{
+        type:Number,
+        default:0
+    }
+
+},
+{
+    timestamps:true
+}
+)
+
+module.exports=mongoose.model("orderCollection",orderSchema)

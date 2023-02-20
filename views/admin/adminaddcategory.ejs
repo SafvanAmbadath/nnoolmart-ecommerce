@@ -1,0 +1,86 @@
+<%- include("partials/admin-header.ejs") -%>
+
+            <!-- PAGE INNER
+            ================================================== -->
+            <div class="page-inner">
+
+                <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+                <div id="main-wrapper">
+
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card card-white">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Upload your Category</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form class="form-inline" action="/adminaddcategory" method="post" enctype="multipart/form-data">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="imageUrl" type="file" multiple />
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card card-white">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Add your category</h4>
+                                </div>
+                                <% if(catAddErr.length>0) {%>
+                                    <p class="form-text" id="" style="color:red"><%= catAddErr %></p>
+                                    <% }else if(catExistErr.length>0){ %>
+                                        <p class="form-text" id="" style="color:red"><%= catExistErr %></p>
+                                        <% } %>
+                                <div class="card-body">
+                                    <!-- <form action="/adminaddcategory" method="post"> -->
+                                        <div class="form-group">
+                                            <label for="exampleInput1">Category Name</label>
+                                            <input name="categoryName" type="text" class="form-control" id="exampleInput1" aria-describedby="exampleInput1" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Description</label>
+                                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                        <!-- <div class="form-group mb-4">
+                                            <label for="exampleFormControlSelect1">Parent</label>
+                                            <select class="form-select form-control" id="exampleFormControlSelect1" aria-label="Default select example">
+                                                <option selected>Choose Parent Category</option>
+                                                <option value="1">Women's Cloths</option>
+                                                <option value="2">Men's Cloths</option>
+                                                <option value="3">Electronics</option>
+                                                <option value="4">Makeup</option>
+                                                <option value="5">Footwear</option>
+                                                <option value="6">Furniture</option>
+                                            </select>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label for="exampleInput1">Offer</label>
+                                            <input name="offer" type="text" class="form-control" id="exampleInput1" aria-describedby="exampleInput1" />
+                                        </div>
+                                       
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">Create Category</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+
+                <div class="page-footer">
+                    <p>Copyright &copy; <span class="current-year"></span> Smartshop All rights reserved.</p>
+                </div>
+            </div>
+
+            <%- include("partials/admin-footer.ejs") -%>

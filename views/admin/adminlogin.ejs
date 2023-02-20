@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- metas -->
+    <meta charset="utf-8">
+    <meta name="author" content="Chitrakoot Web" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Multipurpose eCommerce Template + Admin" />
+    <meta name="description" content="Smartshop - Multipurpose eCommerce Template + Admin" />
+
+    <!-- title  -->
+    <title>nnoolmart</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="img/logos/favicon.ico" >
+    <link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/logos/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logos/apple-touch-icon-114x114.png">
+
+    <!-- plugins -->
+    <link rel="stylesheet" href="css/plugins.css">
+
+    <!-- theme core css -->
+    <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+    
+    
+    <div class="main-wrapper mp-pusher" id="mp-pusher">   
+       <!-- PAGE TITLE
+    ================================================== -->
+    <section class="page-title-section bg-img cover-background  pb-lg-0" data-background="img/bg/page-title.jpg" style="background-image: url(img/bg/page-title.jpg);">
+        <div class="container">
+           
+
+            <div class="title-info">
+                <h1>Admin login</h1></div>
+            <!-- <div class="breadcrumbs-info">
+                <ul class="ps-0">
+                    <li><a href="home-shop-1.html">Home</a></li>
+                    <li><a href="#">Login / Register</a></li>
+                </ul>
+            </div> -->
+
+        </div>
+    </section>
+    
+    <!-- LOGIN REGISTER
+    ================================================== -->
+    <section class="md" data-background="img/bg/bg-1.jpg" style="background-image: url(img/bg/bg-1.jpg);background-size: cover;">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 mb-1-9 mb-lg-0">
+
+                    <div class="common-block">
+
+                        <div class="inner-title">
+                           
+                            <h4 class="mb-0">Login</h4>
+                            <!-- <p class="mb-0">Everything is simple with Login.</p> -->
+                        </div>
+
+                        <form action="/adminlogin" method="post">
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="form-group">
+                                        <label>Admin Name</label>
+                                        <input type="text" class="form-control" name="name" placeholder="Your name here">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-12">
+
+                                    <div class="form-group">
+                                        <label>Password </label>
+                                        <input type="password" class="form-control" name="password" placeholder="Your password here">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <% if(adminLogErr.length>0) {%>
+                                <p class="form-text" id="" style="color:red"><%= adminLogErr %></p>
+                                <% } %>
+
+                            <!-- <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="login-remember">
+                                        <label class="form-check-label" for="login-remember">Keep me signed in</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-start text-md-end">
+                                    <a href="account-password-recovery.html" class="m-link-muted">Forgot password?</a>
+                                </div>
+
+                            </div> -->
+
+                            <button type="submit"  class="butn-style2 mt-4">Login</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div> 
+        </div> 
+    </section>
+</div> 
+
+ 
+                 <!-- all js include start -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- popper js -->
+    <script src="js/popper.min.js"></script>
+
+    <!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- core.min.js -->
+    <script src="js/core.min.js"></script>
+
+    <!-- custom scripts -->
+    <script src="js/main.js"></script>
+	
+	<!-- all js include end -->
+
+</body>
+
+
+<!-- Mirrored from smartshop.websitelayout.net/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Jan 2023 20:36:20 GMT -->
+</html>

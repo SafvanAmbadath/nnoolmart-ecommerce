@@ -1,0 +1,504 @@
+<%- include("partials/admin-header.ejs") -%>
+
+            <!-- PAGE INNER
+            ================================================== -->
+            <div class="page-inner">
+
+                <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+                <div id="main-wrapper">
+                    <form class="needs-validation" action="/adminaddproduct" method="post" enctype="multipart/form-data" novalidate>
+                    <!-- row -->
+                    <div class="row g-xl-3">
+                        <div class="col-xl-8 grid-margin">
+                            <div class="card card-white mb-3">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Image</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <input class="form-control form-control-lg" name="imageUrl" id="id_image1" type="file">
+                                            </div>
+                                        </div>
+                                        <div id="image-box1" class="image-container h-50 w-50"></div>
+                                        <button
+                                          class="btn btn-outline-info"
+                                          id="crop-btn1"
+                                          style="width: 100%; margin-top: 10px; display: none"
+                                          type="button"
+                                        >Crop</button>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <input class="form-control form-control-lg" name="imageUrl" id="id_image2" type="file">
+                                            </div>
+                                        </div>
+                                        <div id="image-box2" class="image-container h-50 w-50"></div>
+                                        <button
+                                          class="btn btn-outline-info"
+                                          id="crop-btn2"
+                                          style="width: 100%; margin-top: 10px; display: none"
+                                          type="button"
+                                        >Crop</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <input class="form-control form-control-lg" name="imageUrl" id="id_image3" type="file">
+                                            </div>
+                                        </div>
+                                        <div id="image-box3" class="image-container h-50 w-50"></div>
+                                        <button
+                                          class="btn btn-outline-info"
+                                          id="crop-btn3"
+                                          style="width: 100%; margin-top: 10px; display: none"
+                                          type="button"
+                                        >Crop</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            <div class="card card-white mb-3">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Product information</h4>
+                                </div>
+                                <% if(addProductErr.length>0){ %>
+                                    <p class="form-text" style="color:red"><%= addProductErr %></p>
+                                <% } %>
+                                <div class="card-body">
+
+                                    
+                                       
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="validationCustom01">Product name</label>
+                                                <input type="text" name="productName" class="form-control" id="validationCustom01" placeholder="First name" value="" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                          
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom09">Category</label>
+                                                <select class="form-select form-control" name="categoryName" id="validationCustom09" aria-label="Default select example">
+                                                    <% for (var i =0 ; i < categories.length ; i++) { %>
+                                                    <option selected><%= categories[i].categoryName %></option>
+                                                    <% } %> 
+                                                    <!-- <option value="1">Shoes</option>
+                                                    <option value="2">Electronics</option>
+                                                    <option value="3">Furniture</option>
+                                                    <option value="4">Others</option> -->
+                                                </select>
+                                            </div>
+                                         
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom02">Brand</label>
+                                                <input type="text" name="brand" class="form-control" id="validationCustom02" placeholder="e.g.Zara" value="" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom03">Price</label>
+                                                <input type="number" name="price" class="form-control" id="validationCustom03" placeholder="e.g.1199" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom04">Discount price</label>
+                                                <input type="number" name="discountPrice" class="form-control" id="validationCustom04" placeholder="e.g.999" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom05">Offer</label>
+                                                <input type="number" name="offer" class="form-control" id="validationCustom05" placeholder="In percentage" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom05">Stock</label>
+                                                <input type="number" name="stock" class="form-control" id="validationCustom05" placeholder="100" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Description</label>
+                                                <textarea type="text" name="description" class="form-control" id="exampleFormControlTextarea1" placeholder="description" rows="3"></textarea>
+                                            </div>
+                                           
+                                            <div>
+                                                <button type="submit" id="confirm-btn" class="btn btn-primary">Add product</button>
+                                            </div>
+                                           
+                                            <!-- <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Wysiwyg</label>
+                                                    <div id="editor">
+                                                        <p>Hello World!</p>
+                                                        <p>Some initial <strong>bold</strong> text</p>
+                                                        <p><br></p>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                   
+
+                                </div>
+                            </div>
+                            <!-- <div class="card card-white mb-3">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Image</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <input class="form-control form-control-lg" id="formFileLg" type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> -->
+                            <!-- <div class="card card-white">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Variants</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <form>
+                                        <label for="validationCustom06">options</label>
+                                        <select class="form-select form-control" id="validationCustom06" aria-label="Default select example">
+                                            <option selected>Title</option>
+                                            <option value="1">Color</option>
+                                            <option value="2">Material</option>
+                                            <option value="3">Style</option>
+                                        </select>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 grid-margin">
+                            <div class="card card-white mb-3">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Pricing</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="border-bottom pb-4 mb-4">
+                                        <form class="mb-4">
+                                            <label for="validationCustom07">Price</label>
+                                            <input type="text" class="form-control" id="validationCustom07" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </form>
+                                        <div class="mb-2">
+                                            <a class="d-inline-block" href="#">
+                                                <i class="fas fa-star text-warning me-1"></i> Set "Compare to" price
+                                            </a>
+                                        </div>
+                                        <a class="d-inline-block" href="#">
+                                            <i class="fas fa-star text-warning me-1"></i> Bulk discount pricing
+                                        </a>
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <span class="settings-option">Availability </span>
+                                            <input type="checkbox" class="js-switch" checked />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card card-white">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Organization</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form class="needs-validation" novalidate>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-4">
+                                                <label for="validationCustom08">Vendor</label>
+                                                <input type="text" class="form-control" id="validationCustom08" placeholder="Adidas" value="Adidas" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-4">
+                                                <label for="validationCustom09">Category</label>
+                                                <select class="form-select form-control" id="validationCustom09" aria-label="Default select example">
+                                                    <option selected>Clothing</option>
+                                                    <option value="1">Shoes</option>
+                                                    <option value="2">Electronics</option>
+                                                    <option value="3">Furniture</option>
+                                                    <option value="4">Others</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12 mb-4">
+                                                <label for="validationCustom10">Collections</label>
+                                                <select class="form-select form-control" id="validationCustom10" aria-label="Default select example">
+                                                    <option selected>Summer</option>
+                                                    <option value="1">Winter</option>
+                                                    <option value="2">Spring</option>
+                                                    <option value="3">Autumn</option>
+                                                </select>
+                                                <small class="form-text text-muted">
+                                                    Add this product to a collection so it’s easy to find in your store.
+                                                </small>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 col-form-label">Tags</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" value="White,Black,Yellow,Red" data-role="tagsinput" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <!-- end row -->
+                </div>
+
+                <div class="page-footer">
+                    <p>Copyright &copy; <span class="current-year"></span> NNOOLMART All rights reserved.</p>
+                </div>
+            </form>
+            </div>
+
+            <%- include("partials/admin-footer.ejs") -%>
+
+
+            <!-- image scrip 1 -->
+<script>
+    // image-box is the id of the div element that will store our cropping image preview
+    const imagebox = document.getElementById("image-box1");
+    // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+    const crop_btn = document.getElementById("crop-btn1");
+    // id_image is the id of the input tag where we will upload the image
+    const input = document.getElementById("id_image1");
+  
+    // When user uploads the image this event will get triggered
+    input.addEventListener("change", () => {
+      // Getting image file object from the input variable
+      const img_data = input.files[0];
+      // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+      // The new object URL represents the specified File object or Blob object.
+      const url = URL.createObjectURL(img_data);
+  
+      // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:70%;">`;
+  
+      // Storing that cropping view image in a variable
+      const image = document.getElementById("image");
+  
+      // Displaying the image box
+      document.getElementById("image-box1").style.display = "block";
+      // Displaying the Crop buttton
+      document.getElementById("crop-btn1").style.display = "block";
+      // Hiding the Post button
+      document.getElementById("confirm-btn").style.display = "none";
+  
+      // Creating a croper object with the cropping view image
+      // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+      // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      });
+  
+      // When crop button is clicked this event will get triggered
+      crop_btn.addEventListener("click", () => {
+        // This method coverts the selected cropped image on the cropper canvas into a blob object
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          // Gets the original image data
+          let fileInputElement = document.getElementById("id_image1");
+          // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+          let file = new File([blob], img_data.name, {
+            type: "image/",
+            lastModified: new Date().getTime(),
+          });
+          // Create a new container
+          let container = new DataTransfer();
+          // Add the cropped image file to the container
+          container.items.add(file);
+          // Replace the original image file with the new cropped image file
+          fileInputElement.files = container.files;
+  
+          // Hide the cropper box
+          document.getElementById("image-box1").style.display = "none";
+          // Hide the crop button
+          document.getElementById("crop-btn1").style.display = "none";
+          // Display the Post button
+          document.getElementById("confirm-btn").style.display = "block";
+        });
+      });
+    });
+  </script>
+
+    <!-- image scrip 2 -->
+    <script>
+        // image-box is the id of the div element that will store our cropping image preview
+        const imagebox2 = document.getElementById("image-box2");
+        // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+        const crop_btn2 = document.getElementById("crop-btn2");
+        // id_image is the id of the input tag where we will upload the image
+        const input2 = document.getElementById("id_image2");
+      
+        // When user uploads the image this event will get triggered
+        input2.addEventListener("change", () => {
+          // Getting image file object from the input variable
+          const img_data = input2.files[0];
+          // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+          // The new object URL represents the specified File object or Blob object.
+          const url = URL.createObjectURL(img_data);
+      
+          // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+          imagebox2.innerHTML = `<img src="${url}" id="image2" style="width:70%;">`;
+      
+          // Storing that cropping view image in a variable
+          const image2 = document.getElementById("image2");
+      
+          // Displaying the image box
+          document.getElementById("image-box2").style.display = "block";
+          // Displaying the Crop buttton
+          document.getElementById("crop-btn2").style.display = "block";
+          // Hiding the Post button
+          document.getElementById("confirm-btn").style.display = "none";
+      
+          // Creating a croper object with the cropping view image
+          // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+          // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+          const cropper = new Cropper(image2, {
+            autoCropArea: 1,
+            viewMode: 1,
+            scalable: false,
+            zoomable: false,
+            movable: false,
+            minCropBoxWidth: 200,
+            minCropBoxHeight: 200,
+          });
+      
+          // When crop button is clicked this event will get triggered
+          crop_btn2.addEventListener("click", () => {
+            // This method coverts the selected cropped image on the cropper canvas into a blob object
+            cropper.getCroppedCanvas().toBlob((blob) => {
+              // Gets the original image data
+              let fileInputElement = document.getElementById("id_image2");
+              // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+              let file = new File([blob], img_data.name, {
+                type: "image/",
+                lastModified: new Date().getTime(),
+              });
+              // Create a new container
+              let container = new DataTransfer();
+              // Add the cropped image file to the container
+              container.items.add(file);
+              // Replace the original image file with the new cropped image file
+              fileInputElement.files = container.files;
+      
+              // Hide the cropper box
+              document.getElementById("image-box2").style.display = "none";
+              // Hide the crop button
+              document.getElementById("crop-btn2").style.display = "none";
+              // Display the Post button
+              document.getElementById("confirm-btn").style.display = "block";
+            });
+          });
+        });
+      </script>
+
+
+  <!-- image scrip 3 -->
+<script>
+    // image-box is the id of the div element that will store our cropping image preview
+    const imagebox3 = document.getElementById("image-box3");
+    // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+    const crop_btn3 = document.getElementById("crop-btn3");
+    // id_image is the id of the input tag where we will upload the image
+    const input3 = document.getElementById("id_image3");
+  
+    // When user uploads the image this event will get triggered
+    input3.addEventListener("change", () => {
+      // Getting image file object from the input variable
+      const img_data = input3.files[0];
+      // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+      // The new object URL represents the specified File object or Blob object.
+      const url = URL.createObjectURL(img_data);
+  
+      // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+      imagebox3.innerHTML = `<img src="${url}" id="image3" style="width:70%;">`;
+  
+      // Storing that cropping view image in a variable
+      const image3 = document.getElementById("image3");
+  
+      // Displaying the image box
+      document.getElementById("image-box3").style.display = "block";
+      // Displaying the Crop buttton
+      document.getElementById("crop-btn3").style.display = "block";
+      // Hiding the Post button
+      document.getElementById("confirm-btn").style.display = "none";
+  
+      // Creating a croper object with the cropping view image
+      // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+      // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+      const cropper = new Cropper(image3, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      });
+  
+      // When crop button is clicked this event will get triggered
+      crop_btn3.addEventListener("click", () => {
+        // This method coverts the selected cropped image on the cropper canvas into a blob object
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          // Gets the original image data
+          let fileInputElement = document.getElementById("id_image3");
+          // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+          let file = new File([blob], img_data.name, {
+            type: "image/",
+            lastModified: new Date().getTime(),
+          });
+          // Create a new container
+          let container = new DataTransfer();
+          // Add the cropped image file to the container
+          container.items.add(file);
+          // Replace the original image file with the new cropped image file
+          fileInputElement.files = container.files;
+  
+          // Hide the cropper box
+          document.getElementById("image-box3").style.display = "none";
+          // Hide the crop button
+          document.getElementById("crop-btn3").style.display = "none";
+          // Display the Post button
+          document.getElementById("confirm-btn").style.display = "block";
+        });
+      });
+    });
+  </script>
+  
+

@@ -1,0 +1,261 @@
+<%- include("partials/user-header.ejs") -%>
+
+	
+
+
+
+   <!-- LOGIN REGISTER
+        ================================================== -->
+        <section class="md pt-5 px-9" data-background="img/bg/bg-1.jpg" style="background-image: url(img/bg/bg-1.jpg);background-size: cover;">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+
+                    
+
+                        <div class="col-lg-6">
+
+                            <div class="common-block">
+    
+                                <div class="inner-title">
+                                    <h4 class="mb-0">Register</h4>
+                                    
+                                </div>
+    
+                                <form action="/register" method="post" id="registerform">
+    
+                                    <div class="row">
+    
+                                        <div class="col-sm-6">
+    
+                                            <div class="form-group">
+                                                <label>Your Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Your name here">
+                                                <i class="form-text" id="usercheck" style="color:red">Required name</i>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="col-sm-6">
+    
+                                            <div class="form-group">
+                                                <label>Your User Name</label>
+                                                <input type="text" class="form-control" name="username" placeholder="Your user name here">
+                                            </div>
+    
+                                        </div>
+    
+                                    </div>
+    
+                                    <div class="row">
+    
+                                        <div class="col-sm-6">
+    
+                                            <div class="form-group">
+                                                <label>Email Address</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Your email here">
+                                                <i id="emailvalid" style="color: red;" class="form-text  invalid-feedback">
+                                                       Required and must be a valid email
+                                                </i>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="col-sm-6">
+    
+                                            <div class="form-group">
+                                                <label>Contact Number</label>
+                                                <input type="text" class="form-control" name="phone" placeholder="+91 823456789">
+                                            </div>
+    
+                                        </div>
+    
+                                    </div>
+    
+                                    <div class="row">
+    
+                                        <div class="col-sm-6">
+    
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Your password here">
+                                                <i class="form-text" id="passcheck" style="color: red;">
+                                                Required Password
+                                                </i>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="col-sm-6">
+    
+                                            <div class="form-group">
+                                                <label>Re-Password</label>
+                                                <input type="password" class="form-control" id="confirmPassword" name="repassword" placeholder="Your re-password here">
+                                                <i class="form-text" id="conpasscheck" style="color: red;">
+                                                    Password didn't match
+                                                </i>
+                                            </div>
+    
+                                        </div>
+    
+                                    </div>
+                                    <% if(registerErr.length>0) {%>
+                                    <i class="form-text" id="" style="color:red"><%= registerErr  %></i>
+                                    <% }else if(existErr.length>0){ %>
+                                      <i class="form-text" id="" style="color:red"><%= existErr  %></i>
+                                      <% } %>
+									<div class="row">
+										
+											
+												
+												<label class="form-check-label" for="terms-condition">Already Registered? <a href="/login" class="text-primary">Login here</a></label>
+											
+										
+	
+									</div>
+    
+                                   
+    
+                                    <button type="submit" id="submitbtn" class="butn-style2 mt-4">Register</button>
+    
+                                </form>
+    
+                            </div>
+                        </div>
+
+                    </div>
+                   
+                </div>
+                </section>
+                <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="crossorigin="anonymous"> </script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script>
+                      $(document).ready(function () {
+  // Validate Username
+  $("#usercheck").hide();
+  let usernameError = true;
+  $("#name").keyup(function () {
+    validateUsername();
+  });
+ 
+  function validateUsername() {
+    let usernameValue = $("#name").val();
+    if (usernameValue.length == "") {
+      $("#usercheck").show();
+      usernameError = false;
+      return false;
+    } else if (usernameValue.length < 5 || usernameValue.length > 12) {
+      $("#usercheck").show();
+      $("#usercheck").html("Required and must be length of 5 to 12");
+      usernameError = false;
+      return false;
+    } else {
+      $("#usercheck").hide();
+    }
+  }
+
+  //   Validate Email
+  // function validateEmail(){
+  const email = document.getElementById("email");
+  email.addEventListener("blur", () => {
+    let regex = /^([\-\.0-9a-zA-Z]+)@([\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+    let s = email.value;
+    if (regex.test(s)) {
+      email.classList.remove("is-invalid");
+      emailError = true;
+    } else {
+      email.classList.add("is-invalid");
+      emailError = false;
+    }
+  });
+// }
+  // Validate Password
+  $("#passcheck").hide();
+  let passwordError = true;
+  $("#password").keyup(function () {
+    validatePassword();
+  });
+  async function validatePassword () {
+    let passwordValue = $("#password").val();
+    if (passwordValue.length == "") {
+      $("#passcheck").show();
+      passwordError = false;
+      return false;
+    }
+    if (passwordValue.length < 6 || passwordValue.length > 12) {
+      $("#passcheck").show();
+      $("#passcheck").html(
+        "Required and must be length of 6 to 12"
+      );
+      $("#passcheck").css("color", "red");
+      passwordError = false;
+      return false;
+    } 
+    let res= await containsSpecialChars(passwordValue)
+   console.log(res);
+  if(res===false){
+    $("#passcheck").show();
+      $("#passcheck").html(
+        "Password must contain special characters"
+      );
+      $("#passcheck").css("color", "red");
+      passwordError = false;
+      return false;
+  }
+  else {
+      $("#passcheck").hide();
+    }
+  }
+  function containsSpecialChars(str) {
+    console.log('ivde vannu');
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  return specialChars.test(str);
+}
+  // Validate Confirm Password
+  $("#conpasscheck").hide();
+  let confirmPasswordError = true;
+  $("#confirmPassword").keyup(function () {
+    validateConfirmPassword();
+  });
+  function validateConfirmPassword() {
+    let confirmPasswordValue = $("#confirmPassword").val();
+    let passwordValue = $("#password").val();
+    if (passwordValue != confirmPasswordValue) {
+      $("#conpasscheck").show();
+      $("#conpasscheck").html("Confirm password does not Match");
+      $("#conpasscheck").css("color", "red");
+      confirmPasswordError = false;
+      return false;
+    } else {
+      $("#conpasscheck").hide();
+    }
+  }
+ 
+  // Submit button
+  $("#submitbtn").click(function () {
+    console.log("submit button just")
+    validateUsername();
+    validatePassword();
+    validateConfirmPassword();
+    validateEmail();
+    if (
+      usernameError == true &&
+      passwordError == true &&
+      confirmPasswordError == true &&
+      emailError == true
+    ) {
+        $('#registerform').submit(function (evt) {
+            console.log("submit")
+    evt.preventDefault();
+    window.history.back();
+});
+      return true;
+    } else {  
+      return false;
+    }
+  });
+})
+                </script>
+
+
+
+				<%- include("partials/user-footer.ejs") -%>
