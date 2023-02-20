@@ -113,8 +113,17 @@
 	<!-- all js include end -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        $(document).ready(function(){
+var firstName = $('#firstName').text();
+var lastName = $('#lastName').text();
+var intials = $('#firstName').text().charAt(0) + $('#firstName').text().charAt(5);
+var profileImage = $('#profileImage').text(intials);
+});
+       </script>
 
 </body>
+
 
 
 <!-- Mirrored from smartshop.websitelayout.net/home-shop-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Jan 2023 20:37:08 GMT -->

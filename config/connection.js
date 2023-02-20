@@ -2,7 +2,7 @@ const mongoose=require("mongoose");
 mongoose.set("strictQuery",false);
 
 module.exports.dbconnection=(cb)=>{
-    mongoose.connect("mongodb://0.0.0.0:27017/nnoolmart",{
+    mongoose.connect(process.env.url,{
         useNewUrlParser:true,
         useUnifiedTopology:true
     }).then(()=>{
